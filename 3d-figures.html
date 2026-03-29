@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Об'ємні фігури та тіла: Довідник</title>
+    <style>
+        /* Базові налаштування typography та кольорів */
+        :root {
+            --bg-color: #f0f4f8;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --accent-color: #2980b9;
+            --formula-bg: #e8f6f3;
+            --formula-border: #1abc9c;
+            --math-color: #c0392b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Семантичний тег header */
+        header {
+            background-color: var(--text-color);
+            color: #ecf0f1;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Семантичний тег main */
+        main {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Семантичний тег section */
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* Семантичний тег article для кожної фігури */
+        article {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Адаптивна сітка */
+        .figure-visual {
+            flex: 1 1 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .figure-content {
+            flex: 2 1 400px;
+        }
+
+        .figure-content h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Кольорові блоки для формул */
+        .formula-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .formula-box {
+            background-color: var(--formula-bg);
+            border-left: 5px solid var(--formula-border);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .formula-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula-math {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: var(--math-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Об'ємні фігури та тіла</h1>
+        <p>Довідник геометричних формул та візуалізацій просторових фігур</p>
+    </header>
+
+    <main>
+        <section>
+            
+            <!-- ПРЯМА ПРИЗМА -->
+            <article>
+                <div class="figure-visual">
+                    <!-- SVG Пряма призма (куб/паралелепіпед) -->
+                    <svg width="180" height="180" viewBox="0 0 150 150">
+                        <!-- Задня і ліва невидимі грані (пунктир) -->
+                        <polygon points="30,120 30,50 100,50" fill="none" stroke="#2980b9" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="30" y1="120" x2="100" y2="120" stroke="#2980b9" stroke-width="2" stroke-dasharray="4,4"/>
+                        <!-- Верхня грань -->
+                        <polygon points="30,50 100,50 120,30 50,30" fill="#d6eaf8" stroke="#2980b9" stroke-width="2"/>
+                        <!-- Передня грань -->
+                        <polygon points="50,30 50,100 120,100 120,30" fill="#aed6f1" stroke="#2980b9" stroke-width="2"/>
+                        <!-- Права грань -->
+                        <polygon points="120,30 120,100 100,120 100,50" fill="#85c1e9" stroke="#2980b9" stroke-width="2"/>
+                        <line x1="50" y1="100" x2="100" y2="120" stroke="#2980b9" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="figure-content">
+                    <h2>Пряма призма</h2>
+                    <div class="formula-group">
+                        <div class="formula-box">
+                            <span class="formula-label">Об'єм (V)</span>
+                            <span class="formula-math">V = S<sub>осн</sub> &middot; H</span>
+                        </div>
+                        <div class="formula-box">
+                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
+                            <span class="formula-math">S<sub>б</sub> = P<sub>осн</sub> &middot; H</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ПРАВИЛЬНА ПІРАМІДА -->
+            <article>
+                <div class="figure-visual">
+                    <!-- SVG Правильна піраміда -->
+                    <svg width="180" height="180" viewBox="0 0 150 150">
+                        <!-- Невидимі лінії основи -->
+                        <polygon points="20,110 100,110 130,80 50,80" fill="none" stroke="#d35400" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="75" y1="20" x2="50" y2="80" stroke="#d35400" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="75" y1="20" x2="130" y2="80" stroke="#d35400" stroke-width="2" stroke-dasharray="4,4"/>
+                        <!-- Видимі грані -->
+                        <polygon points="20,110 100,110 75,20" fill="#f5cba7" stroke="#d35400" stroke-width="2" opacity="0.9"/>
+                        <polygon points="100,110 130,80 75,20" fill="#edbb99" stroke="#d35400" stroke-width="2" opacity="0.9"/>
+                    </svg>
+                </div>
+                <div class="figure-content">
+                    <h2>Правильна піраміда</h2>
+                    <div class="formula-group">
+                        <div class="formula-box">
+                            <span class="formula-label">Об'єм (V)</span>
+                            <span class="formula-math">V = <sup>1</sup>&frasl;<sub>3</sub> S<sub>осн</sub> &middot; H</span>
+                        </div>
+                        <div class="formula-box">
+                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
+                            <span class="formula-math">S<sub>б</sub> = <sup>1</sup>&frasl;<sub>2</sub> P<sub>осн</sub> &middot; m</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ЦИЛІНДР -->
+            <article>
+                <div class="figure-visual">
+                    <!-- SVG Циліндр -->
+                    <svg width="180" height="180" viewBox="0 0 150 150">
+                        <!-- Верхня основа -->
+                        <ellipse cx="75" cy="35" rx="55" ry="18" fill="#d1f2eb" stroke="#16a085" stroke-width="2"/>
+                        <!-- Тіло -->
+                        <rect x="20" y="35" width="110" height="85" fill="#a2d9ce" stroke="none"/>
+                        <!-- Нижня основа (видима частина) -->
+                        <path d="M 20 120 A 55 18 0 0 0 130 120" fill="none" stroke="#16a085" stroke-width="2"/>
+                        <!-- Нижня основа (невидима частина) -->
+                        <path d="M 20 120 A 55 18 0 0 1 130 120" fill="none" stroke="#16a085" stroke-width="2" stroke-dasharray="4,4"/>
+                        <!-- Бокові лінії -->
+                        <line x1="20" y1="35" x2="20" y2="120" stroke="#16a085" stroke-width="2"/>
+                        <line x1="130" y1="35" x2="130" y2="120" stroke="#16a085" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="figure-content">
+                    <h2>Циліндр</h2>
+                    <div class="formula-group">
+                        <div class="formula-box">
+                            <span class="formula-label">Об'єм (V)</span>
+                            <span class="formula-math">V = &pi;R<sup>2</sup>H</span>
+                        </div>
+                        <div class="formula-box">
+                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
+                            <span class="formula-math">S<sub>б</sub> = 2&pi;RH</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- КОНУС -->
+            <article>
+                <div class="figure-visual">
+                    <!-- SVG Конус -->
+                    <svg width="180" height="180" viewBox="0 0 150 150">
+                        <!-- Невидима частина основи -->
+                        <path d="M 20 120 A 55 18 0 0 1 130 120" fill="none" stroke="#8e44ad" stroke-width="2" stroke-dasharray="4,4"/>
+                        <!-- Видиме тіло конуса та передня дуга -->
+                        <path d="M 75 25 L 20 120 A 55 18 0 0 0 130 120 Z" fill="#d7bde2" stroke="#8e44ad" stroke-width="2" opacity="0.8"/>
+                    </svg>
+                </div>
+                <div class="figure-content">
+                    <h2>Конус</h2>
+                    <div class="formula-group">
+                        <div class="formula-box">
+                            <span class="formula-label">Об'єм (V)</span>
+                            <span class="formula-math">V = <sup>1</sup>&frasl;<sub>3</sub> &pi;R<sup>2</sup>H</span>
+                        </div>
+                        <div class="formula-box">
+                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
+                            <span class="formula-math">S<sub>б</sub> = &pi;RL</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- КУЛЯ, СФЕРА -->
+            <article>
+                <div class="figure-visual">
+                    <!-- SVG Куля -->
+                    <svg width="180" height="180" viewBox="0 0 150 150">
+                        <!-- Основне коло -->
+                        <circle cx="75" cy="75" r="60" fill="#fadbd8" stroke="#c0392b" stroke-width="2"/>
+                        <!-- Видима частина екватора -->
+                        <path d="M 15 75 A 60 20 0 0 0 135 75" fill="none" stroke="#c0392b" stroke-width="2"/>
+                        <!-- Невидима частина екватора -->
+                        <path d="M 15 75 A 60 20 0 0 1 135 75" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="4,4"/>
+                        <!-- Радіус -->
+                        <line x1="75" y1="75" x2="135" y2="75" stroke="#c0392b" stroke-width="2"/>
+                        <circle cx="75" cy="75" r="3" fill="#c0392b"/>
+                        <text x="100" y="70" fill="#c0392b" font-weight="bold" font-family="Arial">R</text>
+                    </svg>
+                </div>
+                <div class="figure-content">
+                    <h2>Куля, сфера</h2>
+                    <div class="formula-group">
+                        <div class="formula-box">
+                            <span class="formula-label">Об'єм (V)</span>
+                            <span class="formula-math">V = <sup>4</sup>&frasl;<sub>3</sub> &pi;R<sup>3</sup></span>
+                        </div>
+                        <div class="formula-box">
+                            <span class="formula-label">Площа сфери (S)</span>
+                            <span class="formula-math">S = 4&pi;R<sup>2</sup></span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+</body>
+</html>
