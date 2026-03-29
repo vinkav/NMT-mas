@@ -5,58 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Геометрія: Головна сторінка</title>
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #1e293b;
+            --dark-soft: #334155;
+            --text: #0f172a;
+            --muted: #475569;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f7f6;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.07), transparent 25%),
+                radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 20%),
+                var(--bg);
             margin: 0;
             padding: 0;
         }
+
         header {
-            background-color: #2c3e50;
+            background: linear-gradient(135deg, var(--dark), var(--dark-soft));
             color: #ecf0f1;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem 3.5rem;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
+
         header h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 4vw, 3.3rem);
+            line-height: 1.15;
+        }
+
+        header p {
             margin: 0;
-            font-size: 2.8rem;
+            font-size: 1.08rem;
+            color: #dbeafe;
         }
+
         main {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 0 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1rem 3rem;
         }
-        .card {
-            background: #ffffff;
+
+        .intro {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem;
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
+        }
+
+        .intro h2 {
+            margin: 0 0 12px;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+        }
+
+        .intro p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card);
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease-in-out;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), #38bdf8);
+        }
+
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
         }
-        h2 {
-            color: #2980b9;
+
+        .card h2 {
+            color: var(--primary-dark);
             margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.45rem;
         }
+
+        .card p {
+            color: var(--muted);
+            margin: 0 0 1rem;
+            flex-grow: 1;
+        }
+
+        .tag {
+            display: inline-block;
+            align-self: flex-start;
+            background: #eff6ff;
+            color: var(--primary-dark);
+            border: 1px solid #bfdbfe;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
         .btn {
             display: inline-block;
-            background-color: #3498db;
+            align-self: flex-start;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: #fff;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: background-color 0.2s;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 8px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
+
         .btn:hover {
-            background-color: #2980b9;
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            background: #ecfeff;
+            border: 1px solid #bae6fd;
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+            color: #164e63;
+            box-shadow: var(--shadow);
+        }
+
+        .footer-note strong {
+            color: #0f766e;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem 2.8rem;
+            }
+
+            main {
+                padding: 1.5rem 0.9rem 2rem;
+            }
+
+            .card {
+                min-height: auto;
+            }
         }
     </style>
 </head>
@@ -64,22 +193,44 @@
 
     <header>
         <h1>Просторова геометрія</h1>
-        <p>Інтерактивні навчальні матеріали та візуалізації</p>
+        <p>Інтерактивні навчальні матеріали, теорія та візуалізації для вивчення стереометрії</p>
     </header>
 
     <main>
-        <div class="card">
-            <h2>Теорія по площинах</h2>
-            <p>Вивчіть основні визначення, аксіоми стереометрії, способи задання площин у просторі та варіанти їх взаємного розміщення одна відносно одної та відносно прямих.</p>
-            <!-- Переконайтеся, що файл з теорією називається саме так -->
-            <a href="plane.html" class="btn">Перейти до теорії</a>
-        </div>
+        <section class="intro">
+            <h2>Ласкаво просимо</h2>
+            <p>
+                Ця сторінка створена для зручного доступу до навчальних матеріалів зі стереометрії.
+                Тут ви можете перейти до теоретичних відомостей про площини у просторі та переглянути
+                наочний довідник з основних просторових фігур і формул.
+            </p>
+        </section>
 
-        <div class="card">
-            <h2>Стереометрія: Фігури та Формули</h2>
-            <p>аочний довідник з основних просторових тіл, їх параметрів і формул.</p>
-            <!-- Переконайтеся, що файл з фігурами називається саме так -->
-            <a href="3d-figures.html" class="btn">Переглянути фігури</a>
+        <section class="cards">
+            <div class="card">
+                <span class="tag">Теоретичний матеріал</span>
+                <h2>Теорія по площинах</h2>
+                <p>
+                    Вивчіть основні визначення, аксіоми стереометрії, способи задання площин у просторі
+                    та варіанти їх взаємного розміщення одна відносно одної і відносно прямих.
+                </p>
+                <a href="plane.html" class="btn">Перейти до теорії</a>
+            </div>
+
+            <div class="card">
+                <span class="tag">Візуальний довідник</span>
+                <h2>Стереометрія: Фігури та Формули</h2>
+                <p>
+                    Наочний довідник з основних просторових тіл, їх параметрів, позначень і формул
+                    для обчислення об’єму та площі поверхні.
+                </p>
+                <a href="3d-figures.html" class="btn">Переглянути фігури</a>
+            </div>
+        </section>
+
+        <div class="footer-note">
+            <strong>Порада:</strong> спочатку опрацюйте теоретичний матеріал про площини, а потім переходьте
+            до вивчення просторових тіл і формул — так сприймати стереометрію значно легше.
         </div>
     </main>
 
