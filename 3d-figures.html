@@ -3,302 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Об'ємні фігури та тіла: Довідник</title>
+    <title>Стереометрія: Фігури та Формули</title>
     <style>
-        /* Базові налаштування typography та кольорів */
         :root {
-            --bg-color: #f0f4f8;
-            --text-color: #2c3e50;
-            --card-bg: #ffffff;
-            --accent-color: #2980b9;
-            --formula-bg: #e8f6f3;
-            --formula-border: #1abc9c;
-            --math-color: #c0392b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --bg-soft: #eef4ff;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.12);
+            --radius: 18px;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* Семантичний тег header */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 28%),
+                radial-gradient(circle at top right, rgba(245, 158, 11, 0.10), transparent 22%),
+                var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.55;
+        }
+
+        .page {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
         header {
-            background-color: var(--text-color);
-            color: #ecf0f1;
-            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 42px 20px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            border-radius: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.25);
         }
 
         header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            letter-spacing: 1px;
+            margin: 0 0 10px;
+            font-size: clamp(1.9rem, 4vw, 3rem);
+            line-height: 1.15;
         }
-        
+
         header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 10px;
+            margin: 0;
+            color: #e2e8f0;
+            font-size: 1.05rem;
         }
 
-        /* Семантичний тег main */
-        main {
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
+        .intro,
+        .legend,
+        .section-title {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
 
-        /* Семантичний тег section */
-        section {
+        .intro {
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .intro h2,
+        .legend h2,
+        .section-title h2,
+        .footer-tip h2 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+            font-size: 1.35rem;
+        }
+
+        .intro p,
+        .section-title p,
+        .footer-tip p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .legend {
+            padding: 22px;
+            margin-bottom: 30px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+        }
+
+        .legend-item {
+            background: var(--bg-soft);
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.98rem;
+            color: var(--text);
+        }
+
+        .legend-item strong {
+            color: var(--primary-dark);
+        }
+
+        .section-title {
+            padding: 18px 22px;
+            margin: 26px 0 18px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            overflow: hidden;
         }
 
-        /* Семантичний тег article для кожної фігури */
-        article {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-            align-items: center;
-            transition: transform 0.3s ease;
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 30px -10px rgba(15, 23, 42, 0.18);
         }
 
-        article:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        /* Адаптивна сітка */
-        .figure-visual {
-            flex: 1 1 200px;
+        .visual-box {
+            background: linear-gradient(180deg, #f8fbff, #f1f5f9);
+            border: 1px solid #e5edf7;
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 18px;
+            margin-bottom: 18px;
+            min-height: 240px;
         }
 
-        .figure-content {
-            flex: 2 1 400px;
+        .info-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.45rem;
+            color: var(--primary-dark);
+            text-align: center;
         }
 
-        .figure-content h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 0.5rem;
+        .desc {
+            margin: 0 0 16px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.97rem;
         }
 
-        /* Кольорові блоки для формул */
-        .formula-group {
+        .formula-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 12px;
         }
 
-        .formula-box {
-            background-color: var(--formula-bg);
-            border-left: 5px solid var(--formula-border);
-            padding: 1.2rem 1.5rem;
-            border-radius: 0 8px 8px 0;
+        .formula-item {
+            background: #f8fafc;
+            padding: 13px 14px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
         }
 
         .formula-label {
             display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #7f8c8d;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--secondary);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.04em;
         }
 
-        .formula-math {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            font-size: 1.4rem;
-            color: var(--math-color);
+        .math {
+            font-family: "Cambria Math", "Times New Roman", serif;
+            font-size: 1.18rem;
+            color: #b91c1c;
+            font-weight: 600;
+        }
+
+        .note {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+            font-size: 0.95rem;
+        }
+
+        .footer-tip {
+            margin-top: 32px;
+            background: #ecfeff;
+            border: 1px solid #bae6fd;
+            border-radius: var(--radius);
+            padding: 20px;
+            color: #164e63;
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 14px;
+            }
+
+            header {
+                padding: 30px 16px;
+                border-radius: 18px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-box {
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro,
+            .legend,
+            .section-title,
+            .card,
+            .footer-tip {
+                padding: 16px;
+            }
+
+            .info-box h3 {
+                font-size: 1.25rem;
+            }
+
+            .math {
+                font-size: 1.06rem;
+            }
+
+            .visual-box svg {
+                width: 100%;
+                height: auto;
+                max-width: 220px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="page">
 
     <header>
-        <h1>Об'ємні фігури та тіла</h1>
-        <p>Довідник геометричних формул та візуалізацій просторових фігур</p>
+        <h1>Стереометрія: Фігури та Формули</h1>
+        <p>Наочний довідник з основних просторових тіл, їх параметрів і формул</p>
     </header>
 
-    <main>
-        <section>
-            
-            <!-- ПРЯМА ПРИЗМА -->
-            <article>
-                <div class="figure-visual">
-                    <!-- SVG Пряма призма (куб/паралелепіпед) -->
-                    <svg width="180" height="180" viewBox="0 0 150 150">
-                        <!-- Задня і ліва невидимі грані (пунктир) -->
-                        <polygon points="30,120 30,50 100,50" fill="none" stroke="#2980b9" stroke-width="2" stroke-dasharray="4,4"/>
-                        <line x1="30" y1="120" x2="100" y2="120" stroke="#2980b9" stroke-width="2" stroke-dasharray="4,4"/>
-                        <!-- Верхня грань -->
-                        <polygon points="30,50 100,50 120,30 50,30" fill="#d6eaf8" stroke="#2980b9" stroke-width="2"/>
-                        <!-- Передня грань -->
-                        <polygon points="50,30 50,100 120,100 120,30" fill="#aed6f1" stroke="#2980b9" stroke-width="2"/>
-                        <!-- Права грань -->
-                        <polygon points="120,30 120,100 100,120 100,50" fill="#85c1e9" stroke="#2980b9" stroke-width="2"/>
-                        <line x1="50" y1="100" x2="100" y2="120" stroke="#2980b9" stroke-width="2"/>
-                    </svg>
-                </div>
-                <div class="figure-content">
-                    <h2>Пряма призма</h2>
-                    <div class="formula-group">
-                        <div class="formula-box">
-                            <span class="formula-label">Об'єм (V)</span>
-                            <span class="formula-math">V = S<sub>осн</sub> &middot; H</span>
-                        </div>
-                        <div class="formula-box">
-                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
-                            <span class="formula-math">S<sub>б</sub> = P<sub>осн</sub> &middot; H</span>
-                        </div>
+    <section class="intro">
+        <h2>Про довідник</h2>
+        <p>
+            На цій сторінці подано основні тіла стереометрії: призма, піраміда, циліндр, конус і куля.
+            Для кожної фігури наведено зображення, позначення основних елементів та формули для
+            обчислення об’єму й площ поверхонь.
+        </p>
+    </section>
+
+    <section class="legend">
+        <h2>Умовні позначення</h2>
+        <div class="legend-grid">
+            <div class="legend-item"><strong>V</strong> — об’єм тіла</div>
+            <div class="legend-item"><strong>S<sub>осн</sub></strong> — площа основи</div>
+            <div class="legend-item"><strong>P<sub>осн</sub></strong> — периметр основи</div>
+            <div class="legend-item"><strong>S<sub>б</sub></strong> — площа бічної поверхні</div>
+            <div class="legend-item"><strong>S<sub>п</sub></strong> — площа повної поверхні</div>
+            <div class="legend-item"><strong>H</strong> — висота тіла</div>
+            <div class="legend-item"><strong>R</strong> — радіус основи / кулі</div>
+            <div class="legend-item"><strong>L</strong> — твірна конуса</div>
+            <div class="legend-item"><strong>m</strong> — апофема піраміди</div>
+        </div>
+    </section>
+
+    <section class="section-title">
+        <h2>Многогранники</h2>
+        <p>Тіла, поверхня яких складається з многокутників.</p>
+    </section>
+
+    <div class="container">
+
+        <div class="card">
+            <div class="visual-box">
+                <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Пряма призма">
+                    <ellipse cx="105" cy="188" rx="72" ry="16" fill="#cbd5e1" opacity="0.35"/>
+
+                    <polygon points="78,52 160,52 160,138 78,138"
+                             fill="#bfdbfe" stroke="#1d4ed8" stroke-width="2"/>
+                    <polygon points="52,68 134,68 160,52 78,52"
+                             fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+                    <polygon points="52,68 134,68 134,154 52,154"
+                             fill="#93c5fd" stroke="#1d4ed8" stroke-width="2"/>
+                    <polygon points="134,68 160,52 160,138 134,154"
+                             fill="#60a5fa" stroke="#1d4ed8" stroke-width="2"/>
+
+                    <line x1="52" y1="154" x2="134" y2="154" stroke="#1d4ed8" stroke-width="2"/>
+                    <line x1="134" y1="154" x2="160" y2="138" stroke="#1d4ed8" stroke-width="2"/>
+                    <line x1="52" y1="154" x2="78" y2="138" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="5 4"/>
+
+                    <line x1="178" y1="52" x2="178" y2="138" stroke="#ef4444" stroke-width="3"/>
+                    <line x1="171" y1="52" x2="185" y2="52" stroke="#ef4444" stroke-width="3"/>
+                    <line x1="171" y1="138" x2="185" y2="138" stroke="#ef4444" stroke-width="3"/>
+                    <text x="186" y="100" font-size="18" font-weight="700" fill="#ef4444">H</text>
+
+                    <line x1="52" y1="176" x2="134" y2="176" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 5"/>
+                    <line x1="52" y1="168" x2="52" y2="184" stroke="#2563eb" stroke-width="2.5"/>
+                    <line x1="134" y1="168" x2="134" y2="184" stroke="#2563eb" stroke-width="2.5"/>
+                    <text x="80" y="200" font-size="17" font-weight="700" fill="#1e3a8a">S осн</text>
+                </svg>
+            </div>
+            <div class="info-box">
+                <h3>Пряма призма</h3>
+                <p class="desc">Призма, у якої бічні ребра перпендикулярні до площини основи.</p>
+                <div class="formula-list">
+                    <div class="formula-item">
+                        <span class="formula-label">Об’єм</span>
+                        <span class="math">V = S<sub>осн</sub> · H</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Бічна поверхня</span>
+                        <span class="math">S<sub>б</sub> = P<sub>осн</sub> · H</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Повна поверхня</span>
+                        <span class="math">S<sub>п</sub> = 2S<sub>осн</sub> + P<sub>осн</sub> · H</span>
                     </div>
                 </div>
-            </article>
-
-            <!-- ПРАВИЛЬНА ПІРАМІДА -->
-            <article>
-                <div class="figure-visual">
-                    <!-- SVG Правильна піраміда -->
-                    <svg width="180" height="180" viewBox="0 0 150 150">
-                        <!-- Невидимі лінії основи -->
-                        <polygon points="20,110 100,110 130,80 50,80" fill="none" stroke="#d35400" stroke-width="2" stroke-dasharray="4,4"/>
-                        <line x1="75" y1="20" x2="50" y2="80" stroke="#d35400" stroke-width="2" stroke-dasharray="4,4"/>
-                        <line x1="75" y1="20" x2="130" y2="80" stroke="#d35400" stroke-width="2" stroke-dasharray="4,4"/>
-                        <!-- Видимі грані -->
-                        <polygon points="20,110 100,110 75,20" fill="#f5cba7" stroke="#d35400" stroke-width="2" opacity="0.9"/>
-                        <polygon points="100,110 130,80 75,20" fill="#edbb99" stroke="#d35400" stroke-width="2" opacity="0.9"/>
-                    </svg>
+                <div class="note">
+                    У прямій призмі площа бічної поверхні дорівнює добутку периметра основи на висоту.
                 </div>
-                <div class="figure-content">
-                    <h2>Правильна піраміда</h2>
-                    <div class="formula-group">
-                        <div class="formula-box">
-                            <span class="formula-label">Об'єм (V)</span>
-                            <span class="formula-math">V = <sup>1</sup>&frasl;<sub>3</sub> S<sub>осн</sub> &middot; H</span>
-                        </div>
-                        <div class="formula-box">
-                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
-                            <span class="formula-math">S<sub>б</sub> = <sup>1</sup>&frasl;<sub>2</sub> P<sub>осн</sub> &middot; m</span>
-                        </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="visual-box">
+                <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Правильна піраміда">
+                    <ellipse cx="110" cy="182" rx="72" ry="16" fill="#cbd5e1" opacity="0.35"/>
+
+                    <polygon points="60,150 150,150 182,134 92,134"
+                             fill="#fcd34d" stroke="#b45309" stroke-width="2"/>
+                    <polyline points="60,150 92,134 182,134"
+                              fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="5 4"/>
+
+                    <polygon points="110,42 60,150 150,150"
+                             fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+                    <polygon points="110,42 150,150 182,134"
+                             fill="#fbbf24" stroke="#b45309" stroke-width="2"/>
+                    <polygon points="110,42 92,134 182,134"
+                             fill="#fef3c7" stroke="#b45309" stroke-width="2" opacity="0.95"/>
+
+                    <line x1="110" y1="42" x2="110" y2="142" stroke="#ef4444" stroke-width="3" stroke-dasharray="7 5"/>
+                    <text x="118" y="98" font-size="18" font-weight="700" fill="#ef4444">H</text>
+
+                    <line x1="110" y1="42" x2="166" y2="142" stroke="#10b981" stroke-width="3"/>
+                    <text x="169" y="96" font-size="18" font-weight="700" fill="#059669">m</text>
+                </svg>
+            </div>
+            <div class="info-box">
+                <h3>Правильна піраміда</h3>
+                <p class="desc">Піраміда, в основі якої лежить правильний многокутник, а вершина проєктується в центр основи.</p>
+                <div class="formula-list">
+                    <div class="formula-item">
+                        <span class="formula-label">Об’єм</span>
+                        <span class="math">V = ⅓ S<sub>осн</sub> · H</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Бічна поверхня</span>
+                        <span class="math">S<sub>б</sub> = ½ P<sub>осн</sub> · m</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Повна поверхня</span>
+                        <span class="math">S<sub>п</sub> = S<sub>осн</sub> + ½ P<sub>осн</sub> · m</span>
                     </div>
                 </div>
-            </article>
-
-            <!-- ЦИЛІНДР -->
-            <article>
-                <div class="figure-visual">
-                    <!-- SVG Циліндр -->
-                    <svg width="180" height="180" viewBox="0 0 150 150">
-                        <!-- Верхня основа -->
-                        <ellipse cx="75" cy="35" rx="55" ry="18" fill="#d1f2eb" stroke="#16a085" stroke-width="2"/>
-                        <!-- Тіло -->
-                        <rect x="20" y="35" width="110" height="85" fill="#a2d9ce" stroke="none"/>
-                        <!-- Нижня основа (видима частина) -->
-                        <path d="M 20 120 A 55 18 0 0 0 130 120" fill="none" stroke="#16a085" stroke-width="2"/>
-                        <!-- Нижня основа (невидима частина) -->
-                        <path d="M 20 120 A 55 18 0 0 1 130 120" fill="none" stroke="#16a085" stroke-width="2" stroke-dasharray="4,4"/>
-                        <!-- Бокові лінії -->
-                        <line x1="20" y1="35" x2="20" y2="120" stroke="#16a085" stroke-width="2"/>
-                        <line x1="130" y1="35" x2="130" y2="120" stroke="#16a085" stroke-width="2"/>
-                    </svg>
+                <div class="note">
+                    Апофема <strong>m</strong> — це висота бічної грані правильної піраміди.
                 </div>
-                <div class="figure-content">
-                    <h2>Циліндр</h2>
-                    <div class="formula-group">
-                        <div class="formula-box">
-                            <span class="formula-label">Об'єм (V)</span>
-                            <span class="formula-math">V = &pi;R<sup>2</sup>H</span>
-                        </div>
-                        <div class="formula-box">
-                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
-                            <span class="formula-math">S<sub>б</sub> = 2&pi;RH</span>
-                        </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="section-title">
+        <h2>Тіла обертання</h2>
+        <p>Тіла, які можна отримати внаслідок обертання плоскої фігури навколо осі.</p>
+    </section>
+
+    <div class="container">
+
+        <div class="card">
+            <div class="visual-box">
+                <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Циліндр">
+                    <ellipse cx="110" cy="186" rx="72" ry="16" fill="#cbd5e1" opacity="0.35"/>
+
+                    <ellipse cx="110" cy="58" rx="56" ry="18" fill="#99f6e4" stroke="#0f766e" stroke-width="2.5"/>
+                    <rect x="54" y="58" width="112" height="96" fill="#5eead4" stroke="#0f766e" stroke-width="2.5"/>
+                    <ellipse cx="110" cy="154" rx="56" ry="18" fill="#2dd4bf" stroke="#0f766e" stroke-width="2.5"/>
+                    <path d="M54 154 A56 18 0 0 0 166 154" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+                    <path d="M54 154 A56 18 0 0 1 166 154" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-dasharray="6 5"/>
+
+                    <rect x="72" y="66" width="18" height="80" rx="8" fill="#ffffff" opacity="0.22"/>
+
+                    <line x1="110" y1="58" x2="166" y2="58" stroke="#2563eb" stroke-width="3"/>
+                    <text x="126" y="50" font-size="18" font-weight="700" fill="#1e3a8a">R</text>
+
+                    <line x1="184" y1="58" x2="184" y2="154" stroke="#ef4444" stroke-width="3"/>
+                    <line x1="177" y1="58" x2="191" y2="58" stroke="#ef4444" stroke-width="3"/>
+                    <line x1="177" y1="154" x2="191" y2="154" stroke="#ef4444" stroke-width="3"/>
+                    <text x="192" y="110" font-size="18" font-weight="700" fill="#ef4444">H</text>
+                </svg>
+            </div>
+            <div class="info-box">
+                <h3>Циліндр</h3>
+                <p class="desc">Тіло обертання, утворене обертанням прямокутника навколо однієї зі сторін.</p>
+                <div class="formula-list">
+                    <div class="formula-item">
+                        <span class="formula-label">Об’єм</span>
+                        <span class="math">V = πR²H</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Бічна поверхня</span>
+                        <span class="math">S<sub>б</sub> = 2πRH</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Повна поверхня</span>
+                        <span class="math">S<sub>п</sub> = 2πR² + 2πRH</span>
                     </div>
                 </div>
-            </article>
-
-            <!-- КОНУС -->
-            <article>
-                <div class="figure-visual">
-                    <!-- SVG Конус -->
-                    <svg width="180" height="180" viewBox="0 0 150 150">
-                        <!-- Невидима частина основи -->
-                        <path d="M 20 120 A 55 18 0 0 1 130 120" fill="none" stroke="#8e44ad" stroke-width="2" stroke-dasharray="4,4"/>
-                        <!-- Видиме тіло конуса та передня дуга -->
-                        <path d="M 75 25 L 20 120 A 55 18 0 0 0 130 120 Z" fill="#d7bde2" stroke="#8e44ad" stroke-width="2" opacity="0.8"/>
-                    </svg>
+                <div class="note">
+                    Повна поверхня циліндра складається з двох основ і бічної поверхні.
                 </div>
-                <div class="figure-content">
-                    <h2>Конус</h2>
-                    <div class="formula-group">
-                        <div class="formula-box">
-                            <span class="formula-label">Об'єм (V)</span>
-                            <span class="formula-math">V = <sup>1</sup>&frasl;<sub>3</sub> &pi;R<sup>2</sup>H</span>
-                        </div>
-                        <div class="formula-box">
-                            <span class="formula-label">Площа бічної поверхні (S<sub>б</sub>)</span>
-                            <span class="formula-math">S<sub>б</sub> = &pi;RL</span>
-                        </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="visual-box">
+                <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Конус">
+                    <ellipse cx="110" cy="184" rx="72" ry="16" fill="#cbd5e1" opacity="0.35"/>
+
+                    <ellipse cx="110" cy="148" rx="68" ry="18" fill="none" stroke="#64748b" stroke-width="2.5" stroke-dasharray="7 5"/>
+
+                    <path d="M110 42 L52 148 A68 18 0 0 0 168 148 Z"
+                          fill="#ddd6fe" stroke="#7c3aed" stroke-width="2.5"/>
+                    <path d="M110 42 L110 148 L168 148 Z"
+                          fill="#c4b5fd" opacity="0.65"/>
+
+                    <line x1="110" y1="42" x2="110" y2="148" stroke="#ef4444" stroke-width="3" stroke-dasharray="7 5"/>
+                    <text x="118" y="100" font-size="18" font-weight="700" fill="#ef4444">H</text>
+
+                    <line x1="110" y1="148" x2="168" y2="148" stroke="#2563eb" stroke-width="3"/>
+                    <text x="134" y="140" font-size="18" font-weight="700" fill="#1e3a8a">R</text>
+
+                    <line x1="110" y1="42" x2="52" y2="148" stroke="#4c51bf" stroke-width="3"/>
+                    <text x="72" y="102" font-size="18" font-weight="700" fill="#1e40af">L</text>
+                </svg>
+            </div>
+            <div class="info-box">
+                <h3>Конус</h3>
+                <p class="desc">Тіло обертання, утворене обертанням прямокутного трикутника навколо одного з катетів.</p>
+                <div class="formula-list">
+                    <div class="formula-item">
+                        <span class="formula-label">Об’єм</span>
+                        <span class="math">V = ⅓ πR²H</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Бічна поверхня</span>
+                        <span class="math">S<sub>б</sub> = πRL</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Повна поверхня</span>
+                        <span class="math">S<sub>п</sub> = πR² + πRL</span>
                     </div>
                 </div>
-            </article>
-
-            <!-- КУЛЯ, СФЕРА -->
-            <article>
-                <div class="figure-visual">
-                    <!-- SVG Куля -->
-                    <svg width="180" height="180" viewBox="0 0 150 150">
-                        <!-- Основне коло -->
-                        <circle cx="75" cy="75" r="60" fill="#fadbd8" stroke="#c0392b" stroke-width="2"/>
-                        <!-- Видима частина екватора -->
-                        <path d="M 15 75 A 60 20 0 0 0 135 75" fill="none" stroke="#c0392b" stroke-width="2"/>
-                        <!-- Невидима частина екватора -->
-                        <path d="M 15 75 A 60 20 0 0 1 135 75" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="4,4"/>
-                        <!-- Радіус -->
-                        <line x1="75" y1="75" x2="135" y2="75" stroke="#c0392b" stroke-width="2"/>
-                        <circle cx="75" cy="75" r="3" fill="#c0392b"/>
-                        <text x="100" y="70" fill="#c0392b" font-weight="bold" font-family="Arial">R</text>
-                    </svg>
+                <div class="note">
+                    Тут <strong>L</strong> — твірна конуса. Якщо відомі <strong>R</strong> і <strong>H</strong>, то
+                    <strong>L = √(R² + H²)</strong>.
                 </div>
-                <div class="figure-content">
-                    <h2>Куля, сфера</h2>
-                    <div class="formula-group">
-                        <div class="formula-box">
-                            <span class="formula-label">Об'єм (V)</span>
-                            <span class="formula-math">V = <sup>4</sup>&frasl;<sub>3</sub> &pi;R<sup>3</sup></span>
-                        </div>
-                        <div class="formula-box">
-                            <span class="formula-label">Площа сфери (S)</span>
-                            <span class="formula-math">S = 4&pi;R<sup>2</sup></span>
-                        </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="visual-box">
+                <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Куля">
+                    <ellipse cx="110" cy="186" rx="66" ry="15" fill="#cbd5e1" opacity="0.35"/>
+
+                    <defs>
+                        <radialGradient id="sphereGrad" cx="35%" cy="30%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                            <stop offset="60%" stop-color="#f9a8d4" stop-opacity="0.45"/>
+                            <stop offset="100%" stop-color="#ec4899" stop-opacity="0.18"/>
+                        </radialGradient>
+                    </defs>
+
+                    <circle cx="110" cy="108" r="68" fill="#fbcfe8" stroke="#be185d" stroke-width="3"/>
+                    <circle cx="110" cy="108" r="58" fill="url(#sphereGrad)" opacity="0.65"/>
+
+                    <ellipse cx="110" cy="108" rx="68" ry="18" fill="none" stroke="#be185d" stroke-width="2.5" opacity="0.4"/>
+                    <path d="M42 108 A68 18 0 0 0 178 108" fill="none" stroke="#2563eb" stroke-width="3"/>
+                    <path d="M42 108 A68 18 0 0 1 178 108" fill="none" stroke="#be185d" stroke-width="2.5" opacity="0.25" stroke-dasharray="6 5"/>
+
+                    <circle cx="110" cy="108" r="4" fill="#2563eb"/>
+
+                    <line x1="110" y1="108" x2="178" y2="108" stroke="#2563eb" stroke-width="3"/>
+                    <text x="138" y="100" font-size="18" font-weight="700" fill="#1e3a8a">R</text>
+
+                    <ellipse cx="82" cy="78" rx="18" ry="10" fill="#ffffff" opacity="0.45" transform="rotate(-35 82 78)"/>
+                    <ellipse cx="67" cy="92" rx="8" ry="5" fill="#ffffff" opacity="0.35" transform="rotate(-35 67 92)"/>
+                </svg>
+            </div>
+            <div class="info-box">
+                <h3>Куля</h3>
+                <p class="desc">Геометричне тіло, всі точки поверхні якого однаково віддалені від центра.</p>
+                <div class="formula-list">
+                    <div class="formula-item">
+                        <span class="formula-label">Об’єм</span>
+                        <span class="math">V = ⁴⁄₃ πR³</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Площа сфери</span>
+                        <span class="math">S = 4πR²</span>
+                    </div>
+                    <div class="formula-item">
+                        <span class="formula-label">Діаметр</span>
+                        <span class="math">D = 2R</span>
                     </div>
                 </div>
-            </article>
+                <div class="note">
+                    Для кулі говорять про <strong>об’єм кулі</strong> і <strong>площу сфери</strong>.
+                </div>
+            </div>
+        </div>
 
-        </section>
-    </main>
+    </div>
 
+    <section class="footer-tip">
+        <h2>Пам’ятай</h2>
+        <p>
+            Щоб правильно розв’язувати задачі зі стереометрії, спочатку визнач, до якого типу належить тіло,
+            потім встанови відомі величини та лише після цього обирай потрібну формулу.
+        </p>
+    </section>
+
+</div>
 </body>
 </html>
